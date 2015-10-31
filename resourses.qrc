@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>imgs/icon3.png</file>
+        <file>main.cpp</file>
+        <file>mainwindow.cpp</file>
+        <file>mainwindow.h</file>
+        <file>mainwindow.ui</file>
+        <file>changeinfobutton_window.cpp</file>
+        <file>changeinfobutton_window.h</file>
+        <file>changeinfobutton_window.ui</file>
+    </qresource>
+</RCC>
