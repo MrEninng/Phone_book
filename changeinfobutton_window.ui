@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>571</width>
-    <height>145</height>
+    <height>118</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,19 +32,31 @@
          <string>Number:</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="numberLine"/>
+       <widget class="QLineEdit" name="numberLine">
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Name:</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="nameLine"/>
+       <widget class="QLineEdit" name="nameLine">
+        <property name="placeholderText">
+         <string>Exmpl: Ted</string>
+        </property>
+       </widget>
        <widget class="QLabel" name="label_3">
         <property name="text">
          <string>Second name:</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="secondNameLine"/>
+       <widget class="QLineEdit" name="secondNameLine">
+        <property name="placeholderText">
+         <string>Exmpl: Evelin</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QSplitter" name="splitter_2">
        <property name="orientation">
@@ -55,13 +67,21 @@
          <string>Surname:</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="surnameline"/>
+       <widget class="QLineEdit" name="surnameLine">
+        <property name="placeholderText">
+         <string>Exmpl: Mosbi</string>
+        </property>
+       </widget>
        <widget class="QLabel" name="label_5">
         <property name="text">
          <string>Address:</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="addressLine"/>
+       <widget class="QLineEdit" name="addressLine">
+        <property name="placeholderText">
+         <string>Address</string>
+        </property>
+       </widget>
        <widget class="QLabel" name="label_6">
         <property name="text">
          <string>Date:</string>
@@ -83,6 +103,9 @@
          <widget class="QRadioButton" name="maleRadioButton">
           <property name="text">
            <string>Male</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

@@ -3,20 +3,11 @@
 
 #include <QMainWindow>
 //#include <QSystemTrayIcon> // ???
-#include <QIcon>
-#include <QDebug>
-#include <QtSql>
+//#include <QIcon>
+//#include <QDebug>
+//#include <QtSql>
 #include "changeinfobutton_window.h"
 
-struct person_information {
-    QString number;
-    QString name;
-    QString second_name;
-    QString surname;
-    QString adress;
-    QString gender;
-    QString date;
-};
 
 namespace Ui {
 class MainWindow;
@@ -34,12 +25,17 @@ private slots:
     void is_actionExit_triggered();
     void is_actionAbout_triggered();
     void is_actionAboutQt_triggered();
+    void is_actionSaveAsTXT_triggered();
+    void is_actionOpenAsTXT_triggered();
+
     void is_findBox_clicked();
 
     //кнопки
-    void is_addButton_clicked();// ДОДЕЛАТЬ СВЯЗЬ С БАЗОЙ!
+    void is_addButton_clicked();
     void is_deleteButton_clicked();
     void is_changeInfoButton_clicked();
+    void is_infoButton_clicked();
+    void is_findButton_clicked();
 
     void change_numberLine_background();
     void change_nameLine_background();
@@ -55,14 +51,16 @@ private:
 
     Ui::MainWindow *ui;
     QIcon *icon;
-    changeInfoButton_window change_widget;
+    changeInfoButton_window* change_widget;
     QSqlQueryModel queryModel;
     QSqlTableModel tableModel;
     unsigned int id = 0;
 
     bool addValidFlag = true;
 
-    /*static*/ bool createConnection();
+    bool create_connection();
+
+    void closeEvent(QCloseEvent *);
 };
 
 #endif // MAINWINDOW_H

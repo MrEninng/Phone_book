@@ -302,24 +302,23 @@
     <property name="title">
      <string>File</string>
     </property>
-    <widget class="QMenu" name="menuSave_As">
+    <widget class="QMenu" name="menuSaveAs">
      <property name="title">
       <string>Save As</string>
      </property>
-     <addaction name="separator"/>
-     <addaction name="actionTXT"/>
-     <addaction name="actionJSON"/>
+     <addaction name="actionSaveAsTXT"/>
+     <addaction name="actionSaveAsJSON"/>
     </widget>
     <widget class="QMenu" name="menuOpen">
      <property name="title">
       <string>Open</string>
      </property>
-     <addaction name="actionTXT_2"/>
-     <addaction name="actionJSON_2"/>
+     <addaction name="actionOpenTXT"/>
+     <addaction name="actionOpenJSON"/>
     </widget>
     <addaction name="menuOpen"/>
     <addaction name="separator"/>
-    <addaction name="menuSave_As"/>
+    <addaction name="menuSaveAs"/>
     <addaction name="separator"/>
     <addaction name="actionAbout"/>
     <addaction name="actionAboutQt"/>
@@ -374,12 +373,12 @@
     <string>About</string>
    </property>
   </action>
-  <action name="actionTXT">
+  <action name="actionSaveAsTXT">
    <property name="text">
     <string>TXT</string>
    </property>
   </action>
-  <action name="actionJSON">
+  <action name="actionSaveAsJSON">
    <property name="text">
     <string>JSON</string>
    </property>
@@ -389,12 +388,12 @@
     <string>Exit</string>
    </property>
   </action>
-  <action name="actionTXT_2">
+  <action name="actionOpenTXT">
    <property name="text">
     <string>TXT</string>
    </property>
   </action>
-  <action name="actionJSON_2">
+  <action name="actionOpenJSON">
    <property name="text">
     <string>JSON</string>
    </property>
