@@ -5,7 +5,7 @@
 //#include <QSystemTrayIcon> // ???
 //#include <QIcon>
 //#include <QDebug>
-//#include <QtSql>
+#include <QtSql>
 #include "changeinfobutton_window.h"
 
 
@@ -58,7 +58,7 @@ private:
 
     bool addValidFlag = true;
 
-    bool create_connection();
+    static bool create_connection();
 
     void closeEvent(QCloseEvent *);
 };

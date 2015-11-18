@@ -75,7 +75,6 @@ MainWindow::MainWindow(QWidget *parent) :
        // ИСПОЛЬЗУЕТСЯ две таблицы в базе данных, т.к. это ебаный костыль т.к. я не смог
        // разобраться с тем, как нормально выводить информацию из одной таблицы
 
-
        QString str = "CREATE TABLE phone_book ( "
                     "id INTEGER,"
                     "Number VARCHAR(20), "
@@ -558,16 +557,15 @@ void MainWindow::change_addressLine_background()
 bool MainWindow::create_connection()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("phone_book");
+    db.setDatabaseName("phone_book.db");
     db.setUserName("User");
     db.setHostName("user's_computer");
     db.setPassword("Password");
-
     if (!db.open()) {
         qDebug() << "cannot open database " << db.lastError().text();
         return false;
     } else {
-        //qDebug() << "connected";
+       // qDebug() << "connected";
     }
 
     return true;
