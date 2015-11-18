@@ -22,10 +22,12 @@ changeInfoButton_window::changeInfoButton_window(int id, QTableView *table, QWid
     tableView = table; // указатель на таблицу чтобы менялись там данные
     // В данном блоке задается максимальная длина для полей заполнения
     // И валидаторы для всех кроме Адреса! для него он не нужен(вероятно)
-    ui->nameLine->setMaxLength(10);
-    ui->secondNameLine->setMaxLength(10);
-    ui->surnameLine->setMaxLength(10);
-    ui->addressLine->setMaxLength(10);
+    ui->nameLine->setMaxLength(15);
+    ui->secondNameLine->setMaxLength(15);
+    ui->surnameLine->setMaxLength(15);
+    ui->addressLine->setMaxLength(30);
+
+    ui->dateEdit->setDisplayFormat("dd.MM.yyyy");
 
     QRegExp regExpWordInput("[A-Z|А-Я][a-z | а-я]*");//Первый символ обзательно с заглавной буквы дальше с маленькой
     QRegExpValidator *validatorWordInput = new QRegExpValidator(regExpWordInput,this);
