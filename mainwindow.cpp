@@ -94,6 +94,7 @@ MainWindow::MainWindow(QWidget *parent) :
                      "Gender VARCHAR(10), "
                      "Date VARCHAR(20) "   // можно сделать меньше но с запасом!
                      ");";
+
         if (!(query.exec(str))) {
             qDebug() << "Unable to create informational table" << query.lastError().text();
         }
@@ -155,7 +156,7 @@ void MainWindow::is_actionAboutQt_triggered()
 
 void MainWindow::is_actionSaveAsTXT_triggered()
 {
-    QString fileName = QFileDialog::getSaveFileName(this,tr("Save Phone book as TXT"), "", tr("Phone book(*.txt);;All Files (*)"));
+    QString fileName = QFileDialog::getSaveFileName(this,tr("Save Phone book as TXT"));
     QFile saveTxtFile(fileName);
     if (!saveTxtFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
 //        QMessageBox::information(this, tr("Unable to open file"),
@@ -204,15 +205,70 @@ void MainWindow::is_actionSaveAsTXT_triggered()
 
 void MainWindow::is_actionOpenAsTXT_triggered()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,tr("Open Phone book as TXT"), "", tr("Phone book(*.txt);;All Files (*)"));
+    QString fileName = QFileDialog::getOpenFileName(this,tr("Open Phone book as TXT"));
     QFile openAsTXTFile(fileName);
     if (!openAsTXTFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
        // QMessageBox::information(this, tr("Unable to open file"),
-         //                        openAsTXTFile.errorString());
+         //                        op   enAsTXTFile.errorString());
         qDebug() << "can't open file";
     } else {
-        QString line  = openAsTXTFile.readLine();
-        qDebug() << line;
+        QSqlQuery query, queryInfo;
+        QString line  = openAsTXTFile.readLine(); // Считывается и пропускается первая строка содержащая шапку файла.
+        QStringList readedPartsOfString;
+        QString str, strF;
+
+        // ОЧИСТКА БАЗЫ ДАННЫХ И ТАБЛИЦЫ
+        str = "DELETE FROM phone_book;";
+        query.exec(str);
+        str = "DELETE FROM phone_book_info;";
+        query.exec(str);
+        queryModel.setQuery(query);
+        id = 0;
+
+        queryModel.insertColumns(0,4);
+        queryModel.setHeaderData(0,Qt::Horizontal,QObject::tr("id"));
+        queryModel.setHeaderData(1,Qt::Horizontal,QObject::tr("Number"));
+        queryModel.setHeaderData(2,Qt::Horizontal,QObject::tr("Name"));
+        queryModel.setHeaderData(3,Qt::Horizontal,QObject::tr("Surname"));
+        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        ui->tableView->setModel(&queryModel);
+
+        while (!openAsTXTFile.atEnd()) {
+            line = openAsTXTFile.readLine();
+            readedPartsOfString = line.split('|');
+            // ЦИКЛ ДЛЯ УДАЛЕНИЯ ЛИШНИХ ПРОБЕЛОВ
+            for (int i = 0; i < 7; ++i) {
+                readedPartsOfString[i].replace(" ","");
+//                qDebug() << readedPartsOfString[i];
+            }
+            readedPartsOfString[6].replace('\n',""); //  Удалениe \n
+
+
+            strF = "INSERT INTO phone_book_info (id, SecondName, Address, Gender, Date)"
+                   "VALUES (%1,'%2','%3','%4','%5')";
+            str = strF.arg(id)
+                      .arg(readedPartsOfString[2])
+                      .arg(readedPartsOfString[6])
+                      .arg(readedPartsOfString[4])
+                      .arg(readedPartsOfString[5]);
+            if (!query.exec(str)) {
+                qDebug() << "Unable to make insert Operation into IFNO";
+            }
+
+            strF = "INSERT INTO phone_book (id, number, name, surname)"
+                    "VALUES (%1, '%2', '%3', '%4')";
+            str = strF.arg(id)
+                      .arg(readedPartsOfString[0])
+                      .arg(readedPartsOfString[1])
+                      .arg(readedPartsOfString[3]);
+            if (!query.exec(str)) {
+                qDebug() << "Unable to make insert Operation into Main";
+            }
+            ++id;
+        }
+        str = "SELECT * FROM phone_book;";
+        query.exec(str);
+        queryModel.setQuery(query);
     }
 }
 
@@ -252,7 +308,6 @@ void MainWindow::is_addButton_clicked()
     addValidFlag = true;
     QSqlQuery query;
     person_information record;
-    // bool addValidFlag = true
 
     // ВОЗМОЖНО СТОИТ ЗАМЕНИТЬ ВСЕ НА 1 ЭКСЕПШЕН ТИПА Fill lines!
     try {
@@ -388,7 +443,7 @@ void MainWindow::is_addButton_clicked()
         if (!query.exec("SELECT * FROM phone_book;")) {
             qDebug() << "Unable to  execute query - exiting;";
         }
-        //queryModel.sort(); подумать над сортом!
+
         id++;
 
 
@@ -556,6 +611,7 @@ void MainWindow::change_addressLine_background()
 
 //-----
 
+
 bool MainWindow::create_connection()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
@@ -582,28 +638,36 @@ void MainWindow::closeEvent(QCloseEvent*)
 }
 
 
-// TODO Подумать на структурой флага(да это зашквар) | составной флаг для коннекта смены цвета
+//// TODO Подумать на структурой флага(да это зашквар) | составной флаг для коннекта смены цвета   -FORGET
 // TODO Попробовать переделать рекурентки имени отчества и фамилии на поднятие в заглавную букву
 // TODO Разобраться с QMouseEvent для проверки изменения цвета поля!  Пока на костыле висит
-// TODO Разобраться как чистануть базы данных!  - SOLVED!
-// TODO Разобраться как перенести базу данных в функцию и создать указатель на нее. - SOLVED
-// TODO Подумать над добавлением кнопки Change Information -  SOLVED!
-// TODO Oбдумать костыль для поля Даты при добавление в базу данных SOLVED (Deleted)
-// TODO Подумать над добавлением строк через QAction SOLVED / ЗАменено на костыль|не костыль с двумя базами
+//// TODO Разобраться как чистануть базы данных!  - SOLVED!
+//// TODO Разобраться как перенести базу данных в функцию и создать указатель на нее. - SOLVED
+//// TODO Подумать над добавлением кнопки Change Information -  SOLVED!
+//// TODO Oбдумать костыль для поля Даты при добавление в базу данных SOLVED (Deleted)
+//// TODO Подумать над добавлением строк через QAction SOLVED / ЗАменено на костыль|не костыль с двумя базами
 // TODO окно для поиска ( добавить в главный хэдэр хээдэр окна поиска)!
 // TODO обрабоать замену айдишников после удаления!// возможен вектор с айдишниками, в который будут записаны оставшиеся айдишники, но это убийство памяти
 // TODO сортировка с помощью проксимодели http://www.qtforum.org/article/18679/qsqlquerymodel-qtableview-and-sorting.html
 // TODO Доделать what's this в выскакивающих окнах и главном окне
-// TODO Сделать Валидатор для даты SOLVED
-// TODO Сделать чтобы при нажатии change info  в полях выплевшего окна были данные SOLVED
+//// TODO Сделать Валидатор для даты SOLVED
+//// TODO Сделать чтобы при нажатии change info  в полях выплевшего окна были данные SOLVED
 // TODO Открылся вопрос о полноценности окна появляющегося после нажатия кнопки Find,  Должна ли быть там возможность удалить или редактировать данные?
 // TODO СДЕЛАТЬ В ПЕРВУЮ ОЧЕРЕДЬ СОРТИРОВКУ!
 // TODO Доделать формат для сохранения .TXT( определенное количество символов между разделителями
-// TODO Убрать QMessagebox-ы из сохранения и открытия файла, т.к. эт противоречит религии приложений - SOLVED
+//// TODO Убрать QMessagebox-ы из сохранения и открытия файла, т.к. эт противоречит религии приложений - SOLVED
 // TODO Окно спрашиващее "уверены ли вы что хотите удалить данные"
+// TODO Документацию
+//// TODO Убрать пробелы при считывании и разобарться почему 2 строки. SOLVED
+// TODO Добавить поток для считывания данных
 
 // CHANGES AFTER FIRST COMMIT:
 /* Working buttons: Change info, Personal info!
  * Added changes for closeEvent (clearing database);
  * Working Save AS TXT menuButton;
+ */
+
+/*Changes after secon and third commit:
+ * Working database on linux;
+ * Working dayaedit on linux;
  */

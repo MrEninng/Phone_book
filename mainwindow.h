@@ -53,7 +53,7 @@ private:
     QIcon *icon;
     changeInfoButton_window* change_widget;
     QSqlQueryModel queryModel;
-    QSqlTableModel tableModel;
+  //  QSqlTableModel tableModel;
     unsigned int id = 0;
 
     bool addValidFlag = true;
