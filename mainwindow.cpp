@@ -4,7 +4,6 @@
 #include <QRegExpValidator> //  Регулярные выражения использовались для поля numberLine/ заменено на inputmask
                             // Сейчас используется для валидатора навзаний
 #include <QRegExp>
-//#include <QChar> // НЕ ПОМНЮ ЗАЧЕМ ПОДКЛЮЧАЛ РАБОТАЕТ И БЕЗ НЕГО!// Вероятно для регулярок
 #include <stdexcept>
 #include <QDate>  //  Для валидатора даты
 //#include <QDialog>
@@ -659,7 +658,7 @@ void MainWindow::closeEvent(QCloseEvent*)
 // TODO Окно спрашиващее "уверены ли вы что хотите удалить данные"
 // TODO Документацию
 //// TODO Убрать пробелы при считывании и разобарться почему 2 строки. SOLVED
-// TODO Добавить поток для считывания данных
+// TODO Добавить поток для считывания данных и удаления большого количества строк, иначе прога зависает
 
 // CHANGES AFTER FIRST COMMIT:
 /* Working buttons: Change info, Personal info!
@@ -667,7 +666,11 @@ void MainWindow::closeEvent(QCloseEvent*)
  * Working Save AS TXT menuButton;
  */
 
-/*Changes after secon and third commit:
+/*Changes after second and third commit:
  * Working database on linux;
  * Working dayaedit on linux;
+ */
+
+/* Changes after 4th commit:
+ * added OpenAsTxt button
  */
