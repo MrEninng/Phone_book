@@ -14,13 +14,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    changeinfobutton_window.cpp
+    changeinfobutton_window.cpp \
+    gender_diagram.cpp
 
 HEADERS  += mainwindow.h \
-    changeinfobutton_window.h
+    changeinfobutton_window.h \
+    gender_diagram.h
 
 FORMS    += mainwindow.ui \
-    changeinfobutton_window.ui
+    changeinfobutton_window.ui \
+    gender_diagram.ui
 
 RESOURCES += \
     resourses.qrc

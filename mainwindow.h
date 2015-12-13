@@ -6,6 +6,7 @@
 //#include <QIcon>
 //#include <QDebug>
 #include <QtSql>
+#include <gender_diagram.h>
 #include "changeinfobutton_window.h"
 
 
@@ -28,6 +29,10 @@ private slots:
     void is_actionSaveAsTXT_triggered();
     void is_actionOpenAsTXT_triggered();
 
+
+    void is_actionGender_diagram_triggered();
+
+
     void is_findBox_clicked();
 
     //кнопки
@@ -47,8 +52,6 @@ private slots:
 
 private:
 
-  //  QSystemTrayIcon *trIcon;
-
     Ui::MainWindow *ui;
     QIcon *icon;
     changeInfoButton_window* change_widget;
@@ -57,6 +60,8 @@ private:
     unsigned int id = 0;
 
     bool addValidFlag = true;
+
+    gender_diagram* gender_diagram_widget;
 
     static bool create_connection();
 

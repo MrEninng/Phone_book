@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>825</width>
+    <width>851</width>
     <height>638</height>
    </rect>
   </property>
@@ -223,6 +223,9 @@
         </property>
        </widget>
        <widget class="QSplitter" name="splitter_3">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -294,7 +297,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>825</width>
+     <width>851</width>
      <height>25</height>
     </rect>
    </property>
