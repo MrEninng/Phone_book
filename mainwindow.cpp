@@ -59,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionOpenTXT,SIGNAL(triggered(bool)),this,SLOT(is_actionOpenAsTXT_triggered()));
 
-    connect(ui->actionGender_diagram, SIGNAL(triggered(bool)), this, SLOT(is_actionGender_diagram_triggered()));
+    connect(ui->actionGender_diagram, SIGNAL(triggered(bool)), this, SLOT(is_actionGenderDiagram_triggered()));
 
 
 
@@ -278,7 +278,7 @@ void MainWindow::is_actionOpenAsTXT_triggered()
 
 
 //Круговая диаграмма (Genger_diagram)
-void MainWindow::is_actionGender_diagram_triggered()
+void MainWindow::is_actionGenderDiagram_triggered()
 {
     try {
         QSqlQuery query;

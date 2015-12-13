@@ -30,7 +30,7 @@ private slots:
     void is_actionOpenAsTXT_triggered();
 
 
-    void is_actionGender_diagram_triggered();
+    void is_actionGenderDiagram_triggered();
 
 
     void is_findBox_clicked();

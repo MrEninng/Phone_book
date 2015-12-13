@@ -17,6 +17,7 @@ SOURCES += main.cpp\
     changeinfobutton_window.cpp \
     gender_diagram.cpp
 
+
 HEADERS  += mainwindow.h \
     changeinfobutton_window.h \
     gender_diagram.h
