@@ -9,37 +9,7 @@ gender_diagram::gender_diagram(QWidget *parent) :
     ui(new Ui::gender_diagram)
 {
     ui->setupUi(this);
-    ui->legend_widget->setObjectName("lel");
-
-    //ui->legend_widget->setBackingStore();
-
-    /*QCPBars *men_bar = new QCPBars(ui->legend_widget->xAxis, ui->legend_widget->yAxis);
-    QCPBars *women_bar = new QCPBars(ui->legend_widget->xAxis, ui->legend_widget->yAxis);
-
-    ui->legend_widget->addPlottable(men_bar);
-    ui->legend_widget->addPlottable(women_bar);
-    ui->legend_widget->addAction(men_bar);
-
-
-    men_bar->setName("Men");
-    pen.setColor(QColor(1, 92, 191));
-    men_bar->setPen(pen);
-    men_bar->setBrush(QColor(1, 92, 191, 50));
-    women_bar->setName("Women");
-    pen.setColor(QColor(150, 222, 0));
-    women_bar->setPen(pen);
-    women_bar->setBrush(QColor(150, 222, 0, 70));
-
-    ui->legend_widget->legend->setVisible(true);
-    ui->legend_widget->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignTop|Qt::AlignHCenter);
-    ui->legend_widget->legend->setBrush(QColor(255, 255, 255, 200));
-    QPen legendPen;
-    legendPen.setColor(QColor(130, 130, 130, 200));
-    ui->legend_widget->legend->setBorderPen(legendPen);
-    QFont legendFont = font();
-    legendFont.setPointSize(10);
-    ui->legend_widget->legend->setFont(legendFont);
-    ui->legend_widget->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);*/
+    ui->legend_widget->setObjectName("Gender Diagram");
 
 }
 
@@ -67,9 +37,7 @@ void gender_diagram::paintEvent(QPaintEvent *)
     else
         size = QRectF (5, 5, this->height() - 10, this->height() - 10);
 
-    //int sum = 360;
     int sum = _men + _women;
-    //qDebug() << sum << "kek";
     double start_angle = 0.0;
     double end_angle;
 
@@ -83,7 +51,6 @@ void gender_diagram::paintEvent(QPaintEvent *)
     painter.drawPie(size, start_angle * 16, men_angle * 16);
     start_angle = end_angle;
 
-    //double women_percent = 180 / 360;
     double women_percent = _women / static_cast<double>(sum);
     double women_angle = women_percent * 360;
     end_angle = start_angle + women_angle;
@@ -92,32 +59,6 @@ void gender_diagram::paintEvent(QPaintEvent *)
 
 
 
-//    QCPBars *men_bar = new QCPBars(ui->legend_widget->xAxis, ui->legend_widget->yAxis);
-//    QCPBars *women_bar = new QCPBars(ui->legend_widget->xAxis, ui->legend_widget->yAxis);
-
-//    ui->legend_widget->addPlottable(men_bar);
-//    ui->legend_widget->addPlottable(women_bar);
-
-
-//    men_bar->setName("Men");
-//    pen.setColor(QColor(1, 92, 191));
-//    men_bar->setPen(pen);
-//    men_bar->setBrush(QColor(1, 92, 191, 50));
-//    women_bar->setName("Women");
-//    pen.setColor(QColor(150, 222, 0));
-//    women_bar->setPen(pen);
-//    women_bar->setBrush(QColor(150, 222, 0, 70));
-
-//    ui->legend_widget->legend->setVisible(true);
-//    ui->legend_widget->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignTop|Qt::AlignHCenter);
-//    ui->legend_widget->legend->setBrush(QColor(255, 255, 255, 200));
-//    QPen legendPen;
-//    legendPen.setColor(QColor(130, 130, 130, 200));
-//    ui->legend_widget->legend->setBorderPen(legendPen);
-//    QFont legendFont = font();
-//    legendFont.setPointSize(10);
-//    ui->legend_widget->legend->setFont(legendFont);
-//    ui->legend_widget->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 }
 
 
